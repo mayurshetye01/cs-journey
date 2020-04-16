@@ -3,9 +3,8 @@ package ch02;
 import common.BaseSorterTest;
 import common.Sorter;
 
-public class InsertionSorterTest extends BaseSorterTest {
-
+public class MergeSorterTest extends BaseSorterTest {
     protected Sorter<Integer> getAscendingSorter() {
-        return new InsertionSorter<>(NATURAL_ORDER);
+        return new MergeSorter<>(NATURAL_ORDER);
     }
 }
