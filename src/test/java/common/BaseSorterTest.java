@@ -1,8 +1,8 @@
 package common;
 
 import org.junit.jupiter.api.Test;
+import services.Sorter;
 
-import java.util.Arrays;
 import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.*;

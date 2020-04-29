@@ -1,6 +1,6 @@
 package ch02;
 
-import common.Sorter;
+import services.Sorter;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;

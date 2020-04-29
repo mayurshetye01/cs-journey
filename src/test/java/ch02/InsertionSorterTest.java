@@ -1,7 +1,7 @@
 package ch02;
 
 import common.BaseSorterTest;
-import common.Sorter;
+import services.Sorter;
 
 public class InsertionSorterTest extends BaseSorterTest {
 
