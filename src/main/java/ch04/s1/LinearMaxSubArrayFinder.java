@@ -1,5 +1,8 @@
 package ch04.s1;
 
+import annotations.Complexity;
+import annotations.Quality;
+import annotations.Stage;
 import services.MaxSubArrayFinder;
 import model.SubArray;
 
@@ -7,9 +10,10 @@ import model.SubArray;
  * The max sub array of A[1 .. j+1] is either the max sub array of A[1 .. j] or the sub array A[1 .. j+1] itself
  */
 
-// O(n)
+@Quality(Stage.TESTED)
 public class LinearMaxSubArrayFinder implements MaxSubArrayFinder {
     @Override
+    @Complexity("O(n)")
     public SubArray findMaxSubArray(int[] items) {
         if(items == null)
             return null;

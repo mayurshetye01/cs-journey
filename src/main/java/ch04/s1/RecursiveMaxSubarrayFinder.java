@@ -1,9 +1,12 @@
 package ch04.s1;
 
+import annotations.Complexity;
+import annotations.Quality;
+import annotations.Stage;
 import services.MaxSubArrayFinder;
 import model.SubArray;
 
-// O(nlgn)
+@Quality(Stage.TESTED)
 public class RecursiveMaxSubarrayFinder implements MaxSubArrayFinder {
 
     // Make it static method?
@@ -11,6 +14,7 @@ public class RecursiveMaxSubarrayFinder implements MaxSubArrayFinder {
         return findMaxSubArray(items, 0, items.length - 1);
     }
 
+    @Complexity("O(n.lg(n))")
     private SubArray findMaxSubArray(int[] arr, int low, int high) {
         // Base case
         if (low == high)
@@ -23,14 +27,13 @@ public class RecursiveMaxSubarrayFinder implements MaxSubArrayFinder {
         // Find max subarray to right of midpoint
         SubArray rightResult = findMaxSubArray(arr, mid + 1, high);
         // Find max subarray crossing midpoint
-        SubArray midCrossingResult = findMaxCrossingSubArray(arr, low, mid, high);
+        SubArray midCrossingResult = findMaxMidpointCrossingSubArray(arr, low, mid, high);
 
         return getHighestSubArray(leftResult, rightResult, midCrossingResult);
     }
 
-    // Find the max subarray crossing the midpoint
-    // O(n)
-    private SubArray findMaxCrossingSubArray(int[] arr, int low, int mid, int high) {
+    @Complexity("O(n)")
+    private SubArray findMaxMidpointCrossingSubArray(int[] arr, int low, int mid, int high) {
         long maxLeftSum = Long.MIN_VALUE;
         int maxLeftIndex = mid;
         long sum = 0;
@@ -56,6 +59,7 @@ public class RecursiveMaxSubarrayFinder implements MaxSubArrayFinder {
         return new SubArray(maxLeftIndex, maxRightIndex, maxLeftSum + maxRightSum);
     }
 
+    @Complexity("O(1)")
     private SubArray getHighestSubArray(SubArray leftResult, SubArray rightResult, SubArray midCrossingResult) {
         long maxLeftSum = leftResult.getSum();
         long maxRightSum = rightResult.getSum();

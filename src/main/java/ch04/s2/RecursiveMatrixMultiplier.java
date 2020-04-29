@@ -1,6 +1,8 @@
 package ch04.s2;
 
 
+import annotations.Quality;
+import annotations.Stage;
 import services.MatrixMultiplier;
 
 /***
@@ -8,7 +10,7 @@ import services.MatrixMultiplier;
  * Runtime O(n^3)
  */
 
-//TODO - Major refactoring required
+@Quality(value = Stage.REFACTORING_REQUIRED, explanation = "Use generics, represent SubMatrix using different model")
 public class RecursiveMatrixMultiplier implements MatrixMultiplier {
 
     @Override

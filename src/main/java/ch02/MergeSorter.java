@@ -1,10 +1,14 @@
 package ch02;
 
+import annotations.Complexity;
+import annotations.Quality;
+import annotations.Stage;
 import services.Sorter;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;
 
+@Quality(Stage.TESTED)
 public class MergeSorter<E extends Comparable> implements Sorter<E> {
     private final Comparator<E> comparator;
 
@@ -16,6 +20,7 @@ public class MergeSorter<E extends Comparable> implements Sorter<E> {
         sort(items, 0, items.length);
     }
 
+    @Complexity("O(n.lg(n))")
     private void sort(E[] array, int from, int to){
         // 'from' , 'to' and 'mid' are indices of array
         // If less than 2 elements, no need to sort
@@ -28,6 +33,7 @@ public class MergeSorter<E extends Comparable> implements Sorter<E> {
         merge(array, from, mid, to);
     }
 
+    @Complexity("O(n)")
     private void merge(E[] array, int from, int mid, int to){
         E[] left = (E[]) Array.newInstance(array.getClass().getComponentType(), mid - from);
         E[] right = (E[]) Array.newInstance(array.getClass().getComponentType(), to - mid);

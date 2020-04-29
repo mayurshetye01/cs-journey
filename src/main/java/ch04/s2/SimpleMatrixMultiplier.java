@@ -1,10 +1,14 @@
 package ch04.s2;
 
+import annotations.Complexity;
+import annotations.Quality;
+import annotations.Stage;
 import services.MatrixMultiplier;
 
-// O(n^3)
+@Quality(value = Stage.REFACTORING_REQUIRED, explanation = "Use generics")
 public class SimpleMatrixMultiplier implements MatrixMultiplier {
     @Override
+    @Complexity(value = "O(n^3)", explanation = "Brute force algorithm with 3 for loops")
     public int[][] multiplyMatrices(int[][] first, int[][] second) {
 
         int noOfRows = first.length;
