@@ -1,10 +1,15 @@
 package ch06.s1;
 
+import annotations.Complexity;
+import annotations.Quality;
+import annotations.Stage;
 import services.Sorter;
 
-public class HeapSorter<E extends Comparable<E>> implements Sorter<E> {
+@Quality(Stage.TESTED)
+public class SimpleHeapSorter<E extends Comparable<E>> implements Sorter<E> {
 
     @Override
+    @Complexity("O(n*log(n))")
     public void sort(E[] items) {
         buildMaxHeap(items);
         int heapSize = items.length;
@@ -23,6 +28,7 @@ public class HeapSorter<E extends Comparable<E>> implements Sorter<E> {
     }
 
     //Convert the input array to a max heap
+    @Complexity("O(n)")
     protected void buildMaxHeap(E[] arr) {
         int heapSize = arr.length;
         int endIndex = (int) Math.floor(heapSize / 2 - 1);
@@ -34,6 +40,7 @@ public class HeapSorter<E extends Comparable<E>> implements Sorter<E> {
      * Max heapify the array for the given root.
      * This would result in all children from the given root to be a max heap
      */
+    @Complexity("O(log(n))")
     protected void maxHeapify(E[] arr, int root, int heapSize) {
         int left = 2 * root + 1;
         int right = 2 * root + 2;
