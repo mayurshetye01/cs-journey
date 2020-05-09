@@ -16,7 +16,7 @@ public abstract class BaseSorterTest {
     protected static final Comparator<Integer> NATURAL_ORDER = Integer::compareTo ;
 
     @Test
-    void testSortingNegativeValues(){
+    public void testSortingNegativeValues(){
         final Integer[] items = {-7, -9, -8, 7, 9, 8, 0};
         final Integer[] expected = {-9, -8, -7, 0, 7, 8, 9};
         final int length = items.length;

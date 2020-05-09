@@ -12,7 +12,7 @@ public class InsertionSorter<E extends Comparable<E>> implements Sorter<E> {
 
     private final Comparator<E> comparator;
 
-    InsertionSorter(Comparator<E> comparator) {
+    public InsertionSorter(Comparator<E> comparator) {
         this.comparator = comparator;
     }
 
