@@ -4,7 +4,7 @@ import services.List;
 
 import java.util.Iterator;
 
-public class SinglyLinkedList<E extends Comparable<E>> implements List<E> {
+public class SinglyLinkedList<E> implements List<E> {
 
     private Node head;
     private int size;
@@ -102,7 +102,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E> {
 
             @Override
             public boolean hasNext() {
-                return curr.next != null;
+                return curr != null;
             }
 
             @Override

@@ -146,11 +146,15 @@ public abstract class ListTester {
             i++;
         }
 
+        assertEquals(i, list.size());
+
         i = 0;
         for (Integer elem : list) {
             assertEquals(i, elem);
             i++;
         }
+
+        assertEquals(i, list.size());
 
         list.forEach(elem -> assertNotEquals(null, elem));
 
