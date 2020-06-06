@@ -26,7 +26,11 @@ public class ChainingHashTable<K, V> implements HashTable<K, V> {
         this(capacity, new DivisionHashCalculator());
     }
 
-    private ChainingHashTable(int capacity, HashCalculator hashCalculator) {
+    public ChainingHashTable(HashCalculator hashCalculator) {
+        this(DEFAULT_CAPACITY, hashCalculator);
+    }
+
+    public ChainingHashTable(int capacity, HashCalculator hashCalculator) {
         this.capacity = capacity;
         this.hashCalculator = hashCalculator;
         slots = new SinglyLinkedList[capacity];

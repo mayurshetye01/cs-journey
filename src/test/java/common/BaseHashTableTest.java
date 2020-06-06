@@ -42,10 +42,10 @@ public abstract class BaseHashTableTest {
     @Test
     void testLargeEntries() {
         HashTable<Integer, Integer> hashTable = getHashTableInstance();
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 10000000; i++) {
             hashTable.put(i, i * 10);
         }
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 10000000; i++) {
             assertEquals(i * 10, hashTable.get(i));
         }
         assertNull(null);
