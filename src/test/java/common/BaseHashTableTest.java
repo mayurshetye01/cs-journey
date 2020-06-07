@@ -50,7 +50,6 @@ public abstract class BaseHashTableTest {
         for (int i = 0; i < 10000000; i++) {
             assertEquals(i * 10, hashTable.get(i));
         }
-        assertNull(null);
     }
 
     @Test

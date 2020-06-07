@@ -95,8 +95,10 @@ public class OpenAddressingHashTable<K, V> implements HashTable<K, V> {
                 break;
             K currKey = entry.getKey();
 
-            if ((key == null && currKey == null) || (key != null && key.equals(currKey)))
+            if ((key == null && currKey == null) || (key != null && key.equals(currKey))) {
                 keyIndex = index;
+                break;
+            }
             i++;
         }
         return keyIndex;
