@@ -1,4 +1,4 @@
-package ch11.s2;
+package ch11.s3;
 
 import ch11.HashCalculator;
 

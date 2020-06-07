@@ -1,8 +1,8 @@
-package ch11.s1;
+package ch11.s2;
 
 import ch10.s2.SinglyLinkedList;
 import ch11.HashCalculator;
-import ch11.s2.DivisionHashCalculator;
+import ch11.s3.DivisionHashCalculator;
 import datastructures.HashTable;
 
 import java.util.HashSet;
@@ -14,7 +14,7 @@ public class ChainingHashTable<K, V> implements HashTable<K, V> {
 
     private final int capacity;
     private static final int DEFAULT_CAPACITY = 8192;
-    private SinglyLinkedList<Node<K, V>>[] slots;
+    private SinglyLinkedList<Entry<K, V>>[] slots;
     private final HashCalculator hashCalculator;
     private int size;
 
@@ -41,29 +41,29 @@ public class ChainingHashTable<K, V> implements HashTable<K, V> {
     @Override
     public void put(K key, V value) {
         int index = getIndex(key);
-        SinglyLinkedList<Node<K, V>> list = getList(index);
-        Node<K, V> node = getNode(list, key);
-        if (node == null) {
+        SinglyLinkedList<Entry<K, V>> list = getList(index);
+        Entry<K, V> entry = getEntry(list, key);
+        if (entry == null) {
             list.addFirst(new Node(key, value));
             size++;
         } else
-            node.setValue(value);
+            entry.setValue(value);
         slots[index] = list;
     }
 
     @Override
     public V get(K key) {
         int index = getIndex(key);
-        SinglyLinkedList<Node<K, V>> list = getList(index);
-        Node<K, V> node = getNode(list, key);
+        SinglyLinkedList<Entry<K, V>> list = getList(index);
+        Entry<K, V> entry = getEntry(list, key);
 
-        return node == null ? null : node.value;
+        return entry == null ? null : entry.getValue();
     }
 
     @Override
     public void remove(K key) {
         int index = getIndex(key);
-        SinglyLinkedList<Node<K, V>> list = getList(index);
+        SinglyLinkedList<Entry<K, V>> list = getList(index);
 
         //TODO -> add
 
@@ -74,12 +74,12 @@ public class ChainingHashTable<K, V> implements HashTable<K, V> {
     @Override
     public boolean containsKey(K key) {
         int index = getIndex(key);
-        SinglyLinkedList<Node<K, V>> list = getList(index);
-        Iterator<Node<K, V>> iterator = list.iterator();
+        SinglyLinkedList<Entry<K, V>> list = getList(index);
+        Iterator<Entry<K, V>> iterator = list.iterator();
         boolean containsKey = false;
         while (iterator.hasNext()) {
-            Node currNode = iterator.next();
-            if (currNode.key == null && key == null || currNode.key.equals(key)) {
+            Entry currEntry = iterator.next();
+            if (currEntry.getKey() == null && key == null || currEntry.getKey().equals(key)) {
                 containsKey = true;
                 break;
             }
@@ -93,7 +93,7 @@ public class ChainingHashTable<K, V> implements HashTable<K, V> {
         Set<Entry<K, V>> entrySet = new HashSet<>();
 
         for (int i = 0; i < slots.length; i++) {
-            SinglyLinkedList<Node<K, V>> entries = slots[i];
+            SinglyLinkedList<Entry<K, V>> entries = slots[i];
             if (entries == null || entries.isEmpty())
                 continue;
             entries.forEach(entry -> entrySet.add(entry));
@@ -110,10 +110,10 @@ public class ChainingHashTable<K, V> implements HashTable<K, V> {
         return this.hashCalculator.calculate(Math.abs(index), this.capacity);
     }
 
-    private Node<K, V> getNode(SinglyLinkedList<Node<K, V>> linkedList, K key) {
-        for (Node<K, V> node : linkedList) {
-            if ((key == null && node.key == null) || node.key.equals(key))
-                return node;
+    private Entry<K, V> getEntry(SinglyLinkedList<Entry<K, V>> linkedList, K key) {
+        for (Entry<K, V> entry : linkedList) {
+            if ((key == null && entry.getKey() == null) || entry.getKey().equals(key))
+                return entry;
         }
         return null;
     }
@@ -122,13 +122,13 @@ public class ChainingHashTable<K, V> implements HashTable<K, V> {
         return key == null ? 0 : hashcode(key.hashCode());
     }
 
-    private SinglyLinkedList<Node<K, V>> getList(int index) {
+    private SinglyLinkedList<Entry<K, V>> getList(int index) {
         if (slots[index] == null)
             return new SinglyLinkedList<>();
         return slots[index];
     }
 
-    static class Node<K, V> implements Entry<K, V> {
+    private static class Node<K, V> implements Entry<K, V> {
         K key;
         V value;
 

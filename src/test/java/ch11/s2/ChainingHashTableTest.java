@@ -1,6 +1,5 @@
-package ch11.s1;
+package ch11.s2;
 
-import ch11.s2.MultiplicationHashCalculator;
 import common.BaseHashTableTest;
 import datastructures.HashTable;
 

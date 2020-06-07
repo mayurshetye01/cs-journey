@@ -3,6 +3,8 @@ package common;
 import datastructures.HashTable;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -84,10 +86,26 @@ public abstract class BaseHashTableTest {
         Set<HashTable.Entry<Integer, Integer>> entries = hashTable.entrySet();
         assertEquals(10, entries.size());
 
-        entries.forEach(entry -> {
-            assertNotNull(entry);
-            assertNotNull(entry.getKey());
-            assertNotNull(entry.getValue());
-        });
+        Set<Integer> expected = new HashSet<>();
+        for (int i = 0; i < 10; i++)
+            expected.add(i);
+
+        Set<Integer> resultKeys = new HashSet<>();
+        Set<Integer> resultValues = new HashSet<>();
+        for (HashTable.Entry<Integer, Integer> entry : entries) {
+            resultKeys.add(entry.getKey());
+            resultValues.add(entry.getValue());
+        }
+
+        Arrays.sort(resultKeys.toArray());
+        Arrays.sort(resultValues.toArray());
+
+        for (int i = 0; i < 10; i++) {
+            assertTrue(resultKeys.remove(i));
+            assertTrue(resultValues.remove(i));
+        }
+        assertEquals(0, resultKeys.size());
+        assertEquals(0, resultValues.size());
+
     }
 }
