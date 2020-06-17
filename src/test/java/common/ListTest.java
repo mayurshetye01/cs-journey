@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public abstract class ListTester {
+public abstract class ListTest {
 
     protected abstract List<Integer> getListInstance();
 

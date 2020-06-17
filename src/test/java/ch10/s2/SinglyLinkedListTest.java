@@ -1,9 +1,9 @@
 package ch10.s2;
 
-import common.ListTester;
+import common.ListTest;
 import services.List;
 
-public class SinglyLinkedListTester extends ListTester {
+public class SinglyLinkedListTest extends ListTest {
     @Override
     protected List<Integer> getListInstance() {
         return new SinglyLinkedList<>();
