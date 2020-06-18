@@ -2,6 +2,7 @@ package ch12.s2;
 
 import ch10.s4.TreeNode;
 import ch10.s4.impl.BinaryTreeNode;
+import ch12.BreadthFirstTraversal;
 import common.TreeTest;
 import datastructures.Tree;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,12 @@ public class BinarySearchTreeTest extends TreeTest {
 
         assertEquals(1, tree.minimum().getValue());
         assertEquals(9, tree.maximum().getValue());
+    }
+
+    @Test
+    void printBalancedBinaryTree(){
+        final Tree<Integer, BinaryTreeNode<Integer>> tree = getBalancedBinaryTree();
+        BreadthFirstTraversal.traverse(tree.getRoot());
     }
 
     private static Tree<Integer, BinaryTreeNode<Integer>> getBalancedBinaryTree(){
