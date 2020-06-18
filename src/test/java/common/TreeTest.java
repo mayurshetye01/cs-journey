@@ -3,6 +3,9 @@ package common;
 import datastructures.Tree;
 import org.junit.jupiter.api.Test;
 
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class TreeTest {
@@ -22,14 +25,20 @@ public abstract class TreeTest {
 
     @Test
     void testDelete() {
-        /*Tree tree = getTreeInstance();
+        final Tree tree = getTreeInstance();
         for (int i = 0; i < 10; i++)
             tree.insert(i);
 
-        for (int i = 0; i < 10; i++)
-            tree.delete(i);
+        assertEquals(10, tree.size());
 
-        assertEquals(0, tree.size());*/
+        for (int i = 0; i < 10; i++) {
+            assertNotNull(tree.search(i));
+            tree.delete(i);
+            assertNull(tree.search(i));
+            assertEquals(10 - (i + 1), tree.size());
+        }
+        assertNull(tree.getRoot());
+        assertDoesNotThrow(() -> tree.delete(12312));
     }
 
     @Test
@@ -126,6 +135,50 @@ public abstract class TreeTest {
 
         Tree emptyTree = getTreeInstance();
         assertNull(emptyTree.getRoot());
+    }
+
+    @Test
+    void testTreeWithSmallData() {
+        testTreeWithRandomData(generateRandomValues(100));
+    }
+
+    @Test
+    void testTreeWithLargeData() {
+        testTreeWithRandomData(generateRandomValues(100000));
+    }
+
+    private void testTreeWithRandomData(final List<Integer> values) {
+        final Tree tree = getTreeInstance();
+        values.forEach(tree::insert);
+        assertEquals(values.size(), tree.size());
+        assertEquals(values.get(0), tree.getRoot().getValue());
+
+        assertEquals(Collections.min(values), tree.minimum().getValue());
+        assertEquals(Collections.max(values), tree.maximum().getValue());
+
+        values.forEach(value -> assertEquals(value, tree.search(value).getValue()));
+
+        values.forEach(value -> {
+            tree.delete(value);
+            assertNull(tree.search(value));
+        });
+
+        assertEquals(0, tree.size());
+        assertNull(tree.getRoot());
+
+    }
+
+    private static List<Integer> generateRandomValues(int size) {
+        int max = size;
+        int min = -1 * size;
+        Set<Integer> values = new HashSet<>();
+        for (int i = 0; i < size; ) {
+            if (values.add(ThreadLocalRandom.current().nextInt(min, max + 1)))
+                i++;
+        }
+        List<Integer> uniqueValues = new ArrayList<>();
+        uniqueValues.addAll(values);
+        return uniqueValues;
     }
 
 }

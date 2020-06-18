@@ -48,30 +48,39 @@ public class BinarySearchTree<E, N extends BinaryTreeNode<E>> implements Tree<E,
 
     @Override
     public void delete(E value) {
-        throw new UnsupportedOperationException("Incomplete implementation of method");
-        /*N node = search(value);
-
-size--;
+        N node = search(value);
 
         if (node == null)
             return;
 
-        //Case 1
-        if (node.getRightChild() == null && node.getLeftChild() == null) {
-            N parent = (N) node.getParent();
-            if (parent == null)
-                this.root = null;
-            else if (less(value, parent.getValue()))
-                parent.setLeftChild(null);
-            else
-                parent.setRightChild(null);
+        //Case 1 - Leaf node, i.e. both children null
+        if (node.getRightChild() == null && node.getLeftChild() == null)
+            transplant(node, null);
 
-            node.setParent(null);
+        //Case 2 - Only only one child is null, elevate the other child to take its position
+        else if (node.getRightChild() == null && node.getLeftChild() != null)
+            transplant(node, (N) node.getLeftChild());
 
-        }*/
+        else if (node.getRightChild() != null && node.getLeftChild() == null)
+            transplant(node, (N) node.getRightChild());
 
-        //Case 2
+        //Case 3 - Both children are not null
+        else {
+            N successor = successor(node);
 
+            if (!successor.equals(node.getRightChild())) {
+                transplant(successor, (N) successor.getRightChild());
+                successor.setRightChild(node.getRightChild());
+                successor.getRightChild().setParent(successor);
+            }
+            transplant(node, successor);
+            successor.setLeftChild(node.getLeftChild());
+            successor.getLeftChild().setParent(successor);
+
+        }
+
+        node.setParent(null);
+        size--;
     }
 
     @Override
@@ -172,6 +181,26 @@ size--;
     @Override
     public int size() {
         return this.size;
+    }
+
+    /**
+     * This method replaces the firstSubtree with secondSubtree
+     * i.e. it makes secondSubtree as the child of firstSubtree's parent
+     * This method will not update the children of secondSubtree
+     */
+    private void transplant(N firstSubtree, N secondSubtree) {
+        if (firstSubtree == null)
+            throw new IllegalArgumentException("null");
+        BinaryTreeNode<E> parent = firstSubtree.getParent();
+        if (parent == null)
+            this.root = secondSubtree;
+        else if (firstSubtree.equals(parent.getLeftChild()))
+            parent.setLeftChild(secondSubtree);
+        else
+            parent.setRightChild(secondSubtree);
+
+        if (secondSubtree != null)
+            secondSubtree.setParent(parent);
     }
 
     private boolean less(E first, E second) {

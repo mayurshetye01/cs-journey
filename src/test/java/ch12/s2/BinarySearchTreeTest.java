@@ -17,16 +17,7 @@ public class BinarySearchTreeTest extends TreeTest {
 
     @Test
     public void testBalancedBinaryTree() {
-        final Tree<Integer, BinaryTreeNode<Integer>> tree = new BinarySearchTree<>(Integer::compareTo);
-        tree.insert(5);
-        tree.insert(4);
-        tree.insert(6);
-        tree.insert(3);
-        tree.insert(7);
-        tree.insert(2);
-        tree.insert(8);
-        tree.insert(1);
-        tree.insert(9);
+        final Tree<Integer, BinaryTreeNode<Integer>> tree = getBalancedBinaryTree();
 
         assertEquals(5, tree.getRoot().getValue());
         assertEquals(4, tree.search(5).getLeftChild().getValue());
@@ -40,5 +31,20 @@ public class BinarySearchTreeTest extends TreeTest {
 
         assertEquals(1, tree.minimum().getValue());
         assertEquals(9, tree.maximum().getValue());
+    }
+
+    private static Tree<Integer, BinaryTreeNode<Integer>> getBalancedBinaryTree(){
+        Tree<Integer, BinaryTreeNode<Integer>> tree = new BinarySearchTree<>(Integer::compareTo);
+        tree.insert(5);
+        tree.insert(4);
+        tree.insert(6);
+        tree.insert(3);
+        tree.insert(7);
+        tree.insert(2);
+        tree.insert(8);
+        tree.insert(1);
+        tree.insert(9);
+
+        return tree;
     }
 }
