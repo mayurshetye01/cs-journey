@@ -1,6 +1,6 @@
 package common;
 
-import ch06.s2.HeapPriorityQueue;
+import ch06.s2.MaxHeapPriorityQueue;
 import datastructures.PriorityQueue;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class QueueTest {
         prioritiesList.add(1);
         prioritiesList.add(1);
 
-        PriorityQueue<Integer> priorityQueue = new HeapPriorityQueue<>(prioritiesList);
+        PriorityQueue<Integer> priorityQueue = new MaxHeapPriorityQueue<>(prioritiesList);
         assertEquals(prioritiesList.size(), priorityQueue.size());
         assertEquals(priorityQueue.pop(), 20);
         assertEquals(priorityQueue.pop(), 7);
