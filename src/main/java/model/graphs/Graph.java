@@ -12,8 +12,6 @@ public interface Graph<V extends Vertex, E extends Edge> {
 
     void disconnect(V from, V to);
 
-    void deleteEdge(int from, int to);
-
     V getVertex(int index);
 
     E getEdge(int from, int to);

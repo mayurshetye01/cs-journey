@@ -52,11 +52,6 @@ public class AdjacencyMatrixGraph<V extends Vertex, E extends Edge> implements G
     }
 
     @Override
-    public void deleteEdge(int from, int to) {
-        matrix[from][to] = DISCONNECTED;
-    }
-
-    @Override
     public V getVertex(int index) {
         Vertex vertex = null;
         if (matrix[index][index] == NON_EMPTY) {
@@ -108,11 +103,11 @@ public class AdjacencyMatrixGraph<V extends Vertex, E extends Edge> implements G
     public List<E> getEdges() {
         List<E> edges = new ArrayList<>();
 
-        for(int row = 0; row < matrix.length; row++){
-            for (int col = 0; col < matrix.length; col++){
-                    E edge = getEdge(row, col);
-                    if(edge != null)
-                        edges.add(edge);
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix.length; col++) {
+                E edge = getEdge(row, col);
+                if (edge != null)
+                    edges.add(edge);
             }
         }
 

@@ -3,8 +3,9 @@ package services;
 import model.graphs.Edge;
 import model.graphs.Graph;
 import model.graphs.Vertex;
-import java.util.List;
 
 public interface GraphVisitor<V extends Vertex, E extends Edge> {
-    List<V> visit(Graph<V, E> graph, V source);
+    Graph<V, E> visit(Graph<V, E> graph);
+
+    Graph<V, E> visit(Graph<V, E> graph, int startIndex);
 }
