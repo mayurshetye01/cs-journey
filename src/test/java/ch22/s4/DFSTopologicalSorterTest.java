@@ -5,13 +5,13 @@ import model.graphs.Edge;
 import model.graphs.Graph;
 import model.graphs.Vertex;
 import org.junit.jupiter.api.Test;
-import services.GraphSorter;
+import services.TopologicalSorter;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TopologicalSorterTest {
+public class DFSTopologicalSorterTest {
 
     @Test
     void testTopologicalSort() {
@@ -48,7 +48,7 @@ public class TopologicalSorterTest {
         graph.connect(belt, jacket);
         graph.connect(tie, jacket);
 
-        final GraphSorter<Vertex, Edge> sorter = new TopologicalSorter<>();
+        final TopologicalSorter<Vertex, Edge> sorter = new DFSTopologicalSorter<>();
 
         final List<Vertex> result = sorter.sort(graph);
 

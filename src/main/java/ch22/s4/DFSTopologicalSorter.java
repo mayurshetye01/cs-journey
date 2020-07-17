@@ -4,7 +4,7 @@ import ch22.s3.DepthFirstVisitor;
 import model.graphs.Edge;
 import model.graphs.Graph;
 import model.graphs.Vertex;
-import services.GraphSorter;
+import services.TopologicalSorter;
 import services.GraphVisitor;
 
 import java.util.List;
@@ -12,13 +12,13 @@ import java.util.List;
 import static ch22.GraphProperties.FINISH;
 
 /*
- * The TopologicalSorter works only for a Directed Acyclic Graph (DAG)
+ * The DFSTopologicalSorter works only for a Directed Acyclic Graph (DAG)
  * Returns list of vertices with DECREASING order of finish time
  * i.e The vertex which finishes last is returned first
  * @param <V>
  * @param <E>
  */
-public class TopologicalSorter<V extends Vertex, E extends Edge> implements GraphSorter<V, E> {
+public class DFSTopologicalSorter<V extends Vertex, E extends Edge> implements TopologicalSorter<V, E> {
     @Override
     public List<V> sort(Graph<V, E> graph) {
         final GraphVisitor<V, E> visitor = new DepthFirstVisitor<>();
