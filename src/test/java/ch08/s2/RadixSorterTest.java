@@ -1,7 +1,7 @@
 package ch08.s2;
 
 import common.BaseSorterTest;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+//import jdk.nashorn.internal.ir.annotations.Ignore;
 import services.Sorter;
 
 public class RadixSorterTest extends BaseSorterTest {
@@ -10,9 +10,9 @@ public class RadixSorterTest extends BaseSorterTest {
         return new RadixSorter();
     }
 
-    @Override
+    //@Override
     //radix sort supports only positive values
-    @Ignore
-    public void testSortingNegativeValues() {
-    }
+    //@Ignore
+    //public void testSortingNegativeValues() {
+    //}
 }
